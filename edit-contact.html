@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Contact Details</title>
+    </head>
+    <body onload="getContact()">
+        <div id="avatarImage"></div>
+        <form id="editForm">
+            <label for="firstname">First name</label>
+            <input type="text" name="firstname" id="firstname" readonly><br/>
+
+            <label for="lastname">Last name</label>
+            <input type="text" name="lastname" id="lastname" readonly><br/>
+
+            <label for="mobile">Mobile</label>
+            <input type="text" name="mobile" id="mobile" readonly><br/>
+
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" readonly><br/>
+
+            <label for="avatar" id="avatarLabel" hidden>Change profile image</label><br/>
+            <input type="file" name="avatar" id="avatar" hidden><br/>
+
+            <br/>
+            <button type="submit" id="submitForm" hidden>Submit</button>
+        </form>
+
+        <br/><br/>
+        <button id="homeLink" type="button">Home</button>
+        <button id="editContact" type="button">Edit</button>
+        <button id="deleteContact" type="button">Delete</button>
+        
+        <script src="config.js"></script>
+        <script>
+            // Get contact ID from the URL
+            var id = getId();
+            
+            // Event listener for Home button
+            document.getElementById("homeLink").addEventListener('click', homeLink);
+
+            // Get ID from URL
+            function getId(){
+                var url = window.location.href;
+                var pos = url.indexOf("=");
+                if (pos !== -1) {
+                    return url.slice(pos + 1);
+                } else {
+                    console.error("ID not found in the URL");
+                    return null;
+                }
+            }
+
+            // Fetch contact details from the server
+            function getContact(){
+                if (id) {
+                    fetch(rootPath + 'controller/get-contacts/?id=' + id)
+                    .then(function(response) {
+                        return response.json();  // Parse JSON from response
+                    })
+                    .then(function(data){
+                        // Populate the form fields with data
+                        document.getElementById("firstname").value = data[0].firstname;
+                        document.getElementById("lastname").value = data[0].lastname;
+                        document.getElementById("mobile").value = data[0].mobile;
+                        document.getElementById("email").value = data[0].email;
+
+                        // Set avatar image
+                        let avatarImg = `
+                        <img src="${rootPath}/controller/uploads/${data[0].avatar ? data[0].avatar : 'default-avatar.png'}" width="200" />
+                        `;
+                        document.getElementById("avatarImage").innerHTML = avatarImg;
+                    })
+                    .catch(function(error) {
+                        console.error('Error fetching contact:', error);
+                    });
+                }
+            }
+
+            // Redirect to home
+            function homeLink(){
+                window.open("index.html", "_self");  // Correct "_self"
+            }
+
+            // Edit contact functionality
+            document.getElementById("editContact").addEventListener('click', function() {
+                // Enable form fields for editing
+                document.getElementById("firstname").removeAttribute("readonly");
+                document.getElementById("lastname").removeAttribute("readonly");
+                document.getElementById("mobile").removeAttribute("readonly");
+                document.getElementById("email").removeAttribute("readonly");
+                document.getElementById("avatarLabel").removeAttribute("hidden");
+                document.getElementById("avatar").removeAttribute("hidden");
+                document.getElementById("submitForm").removeAttribute("hidden");
+            });
+
+            // Delete contact functionality
+            document.getElementById("deleteContact").addEventListener('click', function() {
+                if (confirm('Are you sure you want to delete this contact?')) {
+                    // API call to delete the contact
+                    fetch(rootPath + 'controller/delete-contact/?id=' + id, { method: 'DELETE' })
+                    .then(function(response) {
+                        if (response.ok) {
+                            alert("Contact deleted");
+                            window.open("index.html", "_self");
+                        } else {
+                            console.error("Failed to delete contact");
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error("Error during deletion:", error);
+                    });
+                }
+            });
+
+            // Display output of fetched data for avatar and firstname
+            function displayOutput(data){
+                let avatarImg = `
+                <img src="${rootPath}/controller/uploads/${data[0].avatar}" width="200" />
+                `;
+                document.getElementById("avatarImage").innerHTML = avatarImg;
+                document.getElementById("firstname").value = data[0].firstname;
+                document.getElementById("lastname").value = data[0].lastname;
+                document.getElementById("mobile").value = data[0].mobile;
+                document.getElementById("email").value = data[0].email;
+            }
+        </script>
+    </body>
+</html>

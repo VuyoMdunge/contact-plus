@@ -1,0 +1,185 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Style the form container */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Style for the labels */
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #202124;
+}
+
+/* Style for the input fields */
+input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="file"]:focus {
+    border-color: #1a73e8;
+    outline: none;
+}
+
+/* Submit button styling - colorful like Google buttons */
+button#submitForm {
+    background-color: #1a73e8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+button#submitForm:hover {
+    background-color: #155bb5;
+}
+
+/* Home button */
+button#homeLink {
+    background-color: #34a853;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button#homeLink:hover {
+    background-color: #0b7a34;
+}
+
+/* Adding Google-style colors to the labels */
+label[for="firstname"] {
+    color: #ea4335;
+}
+
+label[for="lastname"] {
+    color: #34a853;
+}
+
+label[for="mobile"] {
+    color: #fbbc05;
+}
+
+label[for="email"] {
+    color: #4285f4;
+}
+
+label[for="avatar"] {
+    color: #f47373;
+}
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Table styling */
+#table {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid #dadce0;
+    padding: 10px 0;
+}
+
+td {
+    padding: 10px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+/* Avatar image styling */
+.avatar {
+    border-radius: 50%;
+    border: 2px solid #dadce0;
+}
+
+/* Heading styling */
+h5 {
+    margin: 0;
+    font-size: 16px;
+    color: #202124;
+}
+
+/* Button styling */
+.button-container {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #1a73e8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #155bb5;
+}
+
+/* Add Contact button styling */
+#addContact {
+    background-color: #34a853;
+}
+
+#addContact:hover {
+    background-color: #0b7a34;
+}
+
+/* Refresh button styling */
+#refresh {
+    background-color: #fbbc05;
+}
+
+#refresh:hover {
+    background-color: #e6a700;
+}
